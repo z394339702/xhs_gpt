@@ -5,8 +5,8 @@ import requests
 app = Flask(__name__)
 CORS(app)  # 启用CORS
  
-CLIENT_ID = '8NuJdqPVm2j2ML2ZwQjbFDL9'  # 替换为你的API Key
-CLIENT_SECRET = 'PlvoQBdmsruirBz6jQtGcJUxk8kWBV5B'  # 替换为你的Secret Key
+CLIENT_ID = 'API Key'  # 替换为你的API Key
+CLIENT_SECRET = 'Secret Key'  # 替换为你的Secret Key
  
 @app.route('/getAccessToken', methods=['GET', 'POST'])
 def get_access_token():
