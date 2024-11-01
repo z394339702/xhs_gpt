@@ -1,0 +1,67 @@
+{
+	//（必须）manifest版本，而且必须是2
+	"manifest_version": 2,
+	// （必须）名称
+	"name": "xhs_gpt",
+	// （必须）版本
+	"version": "1.0.0",
+	// （推荐）描述
+	"description": "小红书搜索总结",
+	// （推荐）图标，懒加载可用一个尺寸
+	"icons":
+	{
+	    "16": "xhs_gpt.png",
+	    "32": "xhs_gpt.png",
+	    "48": "xhs_gpt.png",
+	    "64": "xhs_gpt.png",
+	    "128": "xhs_gpt.png"
+	},
+	// background script即插件运行的环境，会一直常驻的后台JS或后台页面
+	"background":
+	{
+		// 2种指定方式，如果指定JS，那么会自动生成一个背景页
+		//"page": "background.html"
+		//"scripts": ["mlxx.js"]
+	},
+	// 浏览器右上角图标设置，browser_action、page_action、app必须三选一
+	//	注意： Packaged apps 不能使用browser actions.
+	"browser_action": 
+	{
+		"default_icon": "xhs_gpt.png",
+		"default_title": "小红书搜索总结" // 图标悬停时的标题，可选
+		//"default_popup": "popup.html"
+	},
+	// 当某些特定页面打开才显示的图标
+	// 需要直接注入页面的JS
+	"content_scripts": 
+	[
+		{
+			"matches": ["https://www.xiaohongshu.com/search_result*"],
+			// "<all_urls>" 表示匹配所有地址
+			// "matches": ["http://*.nmpa.gov.cn/*", "https://*.nmpa.gov.cn/*"],
+			// 多个JS按顺序注入
+			"js": ["jz.js"],
+			// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式
+			// 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
+			"run_at": "document_end",
+			"all_frames": true
+		}
+	],
+	// 权限申请
+	"permissions":
+	[
+		"contextMenus", // 右键菜单
+		"tabs", // 标签
+		"notifications", // 通知
+		"webRequest", // web请求
+		"webRequestBlocking",
+		"storage", // 插件本地存储
+		"http://*/*", // 可以通过executeScript或者insertCSS访问的网站
+		"https://*/*" // 可以通过executeScript或者insertCSS访问的网站
+	],
+	// 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的
+	"web_accessible_resources": ["xhs_gpt.js"],
+	// 扩展的主页 url。扩展的管理界面里面将有一个链接指向这个url。如果你将扩展放在自己的网站上，这个url就很有用了。如果你通过了Extensions Gallery和Chrome Web Store来分发扩展，主页 缺省就是扩展的页面。
+	"homepage_url": "https://github.com/z394339702/xhs_gpt"
+
+}
